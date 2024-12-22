@@ -14,14 +14,16 @@ const NavBar = () => {
         <AiFillBug />
       </Link>
       <ul className="flex space-x-6">
-        <li>
+        -{" "}
+        {links.map((link) => (
           <Link
+            key={link.href}
             className="text-zinc-500 hover:text-zinc-800 transition-colors"
-            href="/"
+            href={link.href}
           >
-            Dashboard
+            {link.label}
           </Link>
-        </li>
+        ))}
         <li>
           <Link href="/issues">Issues</Link>
         </li>
