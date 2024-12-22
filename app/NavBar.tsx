@@ -14,7 +14,6 @@ const NavBar = () => {
         <AiFillBug />
       </Link>
       <ul className="flex space-x-6">
-        -{" "}
         {links.map((link) => (
           <Link
             key={link.href}
@@ -24,9 +23,6 @@ const NavBar = () => {
             {link.label}
           </Link>
         ))}
-        <li>
-          <Link href="/issues">Issues</Link>
-        </li>
       </ul>
     </nav>
   );
