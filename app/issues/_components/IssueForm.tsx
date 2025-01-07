@@ -3,23 +3,24 @@
 //import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
+import { Button, Callout, Select, Text, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/validationSchemas";
+import { issueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import dynamic from "next/dynamic";
 import { Issue } from "@prisma/client";
+import React from "react";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
@@ -30,10 +31,11 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
+  //const [value, setValue] = React.useState("light");
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -60,6 +62,23 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           {...register("title")}
         ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
+        <Select.Root
+          defaultValue={issue?.status}
+          // value={value}
+          //onValueChange={setValue}
+        >
+          <Select.Trigger placeholder="Select..." />
+          <Select.Content>
+            <Select.Group>
+              <Select.Label>Status</Select.Label>
+              <Select.Item value="open">OPEN</Select.Item>
+              <Select.Item value="closed">CLOSED</Select.Item>
+              <Select.Item value="in_progress">IN_PROGRESS</Select.Item>
+            </Select.Group>
+          </Select.Content>
+        </Select.Root>
+
         <Controller
           name="description"
           defaultValue={issue?.description}
