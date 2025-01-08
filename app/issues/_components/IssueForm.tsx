@@ -1,6 +1,5 @@
 "use client";
 
-//import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
 import { Button, Callout, Select, Text, TextField } from "@radix-ui/themes";

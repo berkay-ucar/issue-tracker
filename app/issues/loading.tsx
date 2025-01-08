@@ -3,7 +3,7 @@ import { Table } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
 
 const LoadingIssuesPage = () => {
-  const issues = [1, 2, 3, 4, 5];
+  const issues = [1, 2, 3, 4, 5, 6];
 
   return (
     <div>
@@ -24,6 +24,7 @@ const LoadingIssuesPage = () => {
           {issues.map((issue) => (
             <Table.Row key={issue}>
               <Table.Cell>
+                {/* <Skeleton/> // max height? */}
                 <Skeleton />
                 <div className="block md:hidden">
                   <Skeleton />
