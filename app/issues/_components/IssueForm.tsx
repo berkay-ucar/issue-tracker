@@ -35,12 +35,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
-  //const [value, setValue] = React.useState("light");
+  // const [value, setValue] = React.useState("closed");
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await axios.post("/api/issues", data);
+      if (issue) await axios.patch("/api/issues/" + issue.id, data);
+      else await axios.post("/api/issues", data);
       router.push("/issues");
     } catch (error) {
       setSubmitting(false);
@@ -65,7 +66,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
 
         <Select.Root
           defaultValue={issue?.status}
-          // value={value}
+          //value={value}
           //onValueChange={setValue}
         >
           <Select.Trigger placeholder="Select..." />
@@ -91,7 +92,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button disabled={isSubmitting}>
-          Submit New Issue {isSubmitting && <Spinner />}
+          {issue ? "Update issue" : "Submit New Issue"}{" "}
+          {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
