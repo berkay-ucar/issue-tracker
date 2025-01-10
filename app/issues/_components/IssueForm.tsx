@@ -34,7 +34,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
-  // const [value, setValue] = React.useState("closed");
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -63,22 +62,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           {...register("title")}
         ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-
-        <Select.Root
-          defaultValue={issue?.status}
-          //value={value}
-          //onValueChange={setValue}
-        >
-          <Select.Trigger placeholder="Select..." />
-          <Select.Content>
-            <Select.Group>
-              <Select.Label>Status</Select.Label>
-              <Select.Item value="open">OPEN</Select.Item>
-              <Select.Item value="closed">CLOSED</Select.Item>
-              <Select.Item value="in_progress">IN_PROGRESS</Select.Item>
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
 
         <Controller
           name="description"
