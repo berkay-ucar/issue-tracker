@@ -63,6 +63,15 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
+        {/* <Select.Root>
+          <Select.Trigger placeholder="Select..." {...register("status")} />
+          <Select.Content>
+            <Select.Item value="open">OPEN</Select.Item>
+            <Select.Item value="closed">CLOSED</Select.Item>
+            <Select.Item value="in_progress">IN_PROGRESS</Select.Item>
+          </Select.Content>
+        </Select.Root> */}
+
         <Controller
           name="description"
           defaultValue={issue?.description}
@@ -71,7 +80,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button disabled={isSubmitting}>
