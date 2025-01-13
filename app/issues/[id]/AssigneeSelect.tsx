@@ -5,7 +5,6 @@ import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = useUsers();
@@ -14,13 +13,9 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null;
 
   const assignIssue = (userId: string) => {
-    axios
-      .patch("/api/issues/" + issue.id, {
-        assignedToUserId: userId === "unassigned" ? null : userId,
-      })
-      .catch(() => {
-        toast.error("Changes could not be saved.");
-      });
+    axios.patch("/api/issues/" + issue.id, {
+      assignedToUserId: userId === "unassigned" ? null : userId,
+    });
   };
 
   return (
@@ -42,7 +37,6 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
           </Select.Group>
         </Select.Content>
       </Select.Root>
-      <Toaster />
     </>
   );
 };
