@@ -33,6 +33,9 @@ const IssuesPage = async (props: Props) => {
       status,
       //status: searchParams.status,
     },
+    orderBy: {
+      [searchParams.orderBy]: "asc",
+    },
   });
 
   return (
