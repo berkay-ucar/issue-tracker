@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Pagination from "./components/Pagination";
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
+export default async function Home(
+  props: {
+    searchParams: Promise<{ page: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   return (
     <Pagination
       itemCount={100}
