@@ -1,6 +1,5 @@
-import { Status, Issue } from "@prisma/client";
+import { Status } from "@prisma/client";
 import { Badge } from "@radix-ui/themes";
-import React from "react";
 
 const statusMap: Record<
   Status,
@@ -9,6 +8,10 @@ const statusMap: Record<
   OPEN: { label: "Open", color: "red" },
   IN_PROGRESS: { label: "In progress", color: "violet" },
   CLOSED: { label: "Closed", color: "green" },
+  ALL: {
+    label: "",
+    color: "red",
+  },
 };
 
 const IssueStatusBadge = ({ status }: { status: Status }) => {
