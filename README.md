@@ -1,3 +1,6 @@
+This project has been restructured by me based on the concepts I learned from the CodeWithMosh course. The original course code has not been shared.
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
